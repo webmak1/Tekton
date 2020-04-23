@@ -20,4 +20,4 @@ spec:
   type: image
   params:
     - name: url
-      value: webmakaka/podinfo:2.1.3
+      value: ${MY_REGISTRY_USERNAME}/${MY_APP_NAME}:${MY_APP_VERSION}

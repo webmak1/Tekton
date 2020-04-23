@@ -3,13 +3,6 @@
 
 <br/>
 
-From the begiinging...
-
-Update tekton-pipeline-resource.yaml  
-Replace webmakaka/podinfo:2.1.3 on your image.
-
-<br/>
-
 **Create registry secret for accessing Azure Container Registry:**
 
 
@@ -49,12 +42,24 @@ https://github.com/tektoncd/pipeline/blob/master/docs/install.md
 
 **Prepare Tekton pipelines:**
 
-    $ kubectl apply -f ./tekton-pipeline-resource.yaml 
+    $ export MY_REGISTRY_USERNAME=webmakaka
+    $ export MY_APP_NAME=podinfo
+    $ export MY_APP_VERSION=2.1.3
+
+<br/>
+
+    $ envsubst < tekton-pipeline-resource.yaml > tekton-pipeline-resource-modified.yaml
+
+<br/>
+
+    $ kubectl apply -f ./tekton-pipeline-resource-modified.yaml
     $ kubectl apply -f ./tekton-task-pipeline.yaml 
 
 <br/>
 
 **Initiate PipelineRun which builds container image form git repository:**
+
+<br/>
 
     $ kubectl apply -f ./tekton-pipeline-run.yaml 
 
