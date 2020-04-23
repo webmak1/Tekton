@@ -1,6 +1,5 @@
-# tekton (navive Kubernetes CI/CD)
+# Example how to build and push docker container from local kubernetes cluster (minikube) to hub.docker.com registry by Tekton CI/CD
 
-**Build and Push container to hub.docker.com registry.**
 
 <br/>
 
@@ -15,10 +14,12 @@ Replace webmakaka/podinfo:2.1.3 on your image.
 
 
 ```
-$ export CONTAINER_REGISTRY_SERVER="https://index.docker.io/v1/"
-$ export CONTAINER_REGISTRY_USERNAME=your-docker-registry-username
-$ export CONTAINER_REGISTRY_PASSWORD=your-docker-registry-password
-$ export CONTAINER_REGISTRY_EMAIL=your-docker-registry-email
+$ {
+    export CONTAINER_REGISTRY_SERVER="https://index.docker.io/v1/"
+    export CONTAINER_REGISTRY_USERNAME=your-docker-registry-username
+    export CONTAINER_REGISTRY_PASSWORD=your-docker-registry-password
+    export CONTAINER_REGISTRY_EMAIL=your-docker-registry-emai
+}
 ```
 
 ```
@@ -33,12 +34,16 @@ $ kubectl create secret docker-registry docker-config \
 
 **Install Tekton with Dashboard:**
 
-    $ kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+**Official Doc:**  
+https://github.com/tektoncd/pipeline/blob/master/docs/install.md
+
 
 <br/>
 
-* tekton-dashboard.yaml
-* tekton-services.yaml
+    $ kubectl apply --filename https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml
+
+    $ kubectl get pods --namespace tekton-pipelines --watch
+
 
 <br/>
 
@@ -55,25 +60,35 @@ $ kubectl create secret docker-registry docker-config \
 
 <br/>
 
+    $ watch kubectl get pipelineruns podinfo-build-docker-image-from-git-pipelinerun
+
+<br/>
+
     $ kubectl get tr
     $ tkn taskrun logs podinfo-build-docker-image-from-git-pipelinerun-build-doc-86dlt
 
 <br/>
 
-**Check if the build of docker image was completed:**
+### Tekton Dashboard
 
-    $ kubectl wait --timeout=30m --for=condition=Succeeded pipelineruns/podinfo-build-docker-image-from-git-pipelinerun
-
-    $ kubectl get pipelineruns podinfo-build-docker-image-from-git-pipelinerun
-
-<br/>
-
-**Info:**   
-https://ruzickap.github.io/k8s-flagger-istio-flux/part-03/
+**Official Doc:**  
+https://github.com/tektoncd/dashboard
 
 
 <br/>
 
-**Taken from here:**  
+    $ kubectl apply --filename https://github.com/tektoncd/dashboard/releases/download/v0.6.1/tekton-dashboard-release.yaml
 
-https://github.com/ruzickap/k8s-flagger-istio-flux/tree/master/files/flux-repository
+    $ kubectl get pods --namespace tekton-pipelines
+
+
+    $ kubectl --namespace tekton-pipelines port-forward svc/tekton-dashboard 9097:9097
+
+
+localhost:9097
+
+---
+
+<strong>Marley</strong>
+
+<a href="https://webmakaka.com"><strong>WebMakaka</strong></a>
