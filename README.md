@@ -42,9 +42,11 @@ https://github.com/tektoncd/pipeline/blob/master/docs/install.md
 
 **Prepare Tekton pipelines:**
 
-    $ export MY_REGISTRY_USERNAME=webmakaka
-    $ export MY_APP_NAME=podinfo
-    $ export MY_APP_VERSION=2.1.3
+    $ {
+        export MY_REGISTRY_USERNAME=webmakaka
+        export MY_APP_NAME=podinfo
+        export MY_APP_VERSION=2.1.3
+    }
 
 <br/>
 
