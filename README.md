@@ -25,7 +25,7 @@ $ kubectl create secret docker-registry docker-config \
 
 <br/>
 
-**Install Tekton with Dashboard:**
+**Install Tekton:**
 
 **Official Doc:**  
 https://github.com/tektoncd/pipeline/blob/master/docs/install.md
