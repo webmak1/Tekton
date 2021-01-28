@@ -96,6 +96,5 @@ localhost:9097
 
 ---
 
-<strong>Marley</strong>
+<a href="https://marley.org"><strong>Marley</strong></a>
 
-<a href="https://webmakaka.com"><strong>WebMakaka</strong></a>
